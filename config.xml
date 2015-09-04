@@ -6,6 +6,13 @@
         <preference name="orientation" value="landscape" />
         <preference name="webviewbounce" value="false" />
 	<preference name="prerendered-icon" value="true"/>
+        <gap:platform name="ios" />
+       <gap:config-file platform="ios" parent="UISupportedInterfaceOrientations" overwrite="true">
+        <array>
+            
+            <string>UIInterfaceOrientationLandscapeRight</string>
         </array>
     </gap:config-file>
+
+
 </widget>
