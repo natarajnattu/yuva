@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>YUVA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="css/natttu.min.css" media="screen">
+    <link rel="stylesheet" href="app.css" media="screen">
+      <style>
+      .list-group-item{
+        box-shadow: 0 0 1px #888888;
+        border: none;
+      }
+.list-group-item:first-child {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+}
+.list-group-item:last-child {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+}
+      </style>
+  </head>
+  <body>
+      
+      
+      
+<nav class="navbar navbar-inverse navbar-fixed-top" style="margin-bottom: 0; color: white; box-shadow: 0px 0px 15px #000; border-radius: none; background: #fbbc04">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" style="float: left; margin-left: 10px">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar" style="background-color: white"></span>
+                      <span class="icon-bar" style="background-color: white"></span>
+                      <span class="icon-bar" style="background-color: white"></span>
+                    </button>
+                      
+                      <button type="button" class="navbar-toggle collapsed" style="float: right;  margin: 0;  padding: 0;  margin-right: 16px;  margin-top: -5px;  margin-bottom: -6px;" onclick="location.reload()">
+                      <span style="color: white; font-size: 40px"> <img src="3.png" width="30px"> <span style="font-size: 10px"></span></span>
+                    </button>
+                    
+                  </div>
+
+                  <div class="collapse navbar-collapse navbar-left" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                      <li><a href="javascript:void(0)" onclick="$('#source-modal').modal('show');" style="color: #fff">About</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+
+      
+      
+      
+    <div class="">
+
+      <br>
+      <br>
+      <br>
+
+
+
+
+
+      <!-- Containers
+      ================================================== -->
+      <div class="container" style="padding: 0 !important">
+      <div class="bs-docs-section">
+        <div class="row" style="margin: 0">
+          <div class="col-lg-12" style="padding: 0 !important">
+            <div class="bs-component">
+              <ul class="list-group">
+                  <div class='listarticlespace'>
+                  </div>
+              </ul>
+                
+                <p style="text-align: center; margin-bottom: 10px; display: none" id='minion1'><img src="Minion-reading-icon.png" width="50px" /> </p>
+                
+                
+                
+<div class="loader" style="margin-bottom: 10px">
+  <div class="green"></div>
+  <div class="red"></div>
+  <div class="blue"></div>
+  <div class="yellow"></div>
+</div>
+                
+                <p id="nttd" style="text-align: center;color: #a60404; background: #fff; padding: 10px; display: none"><img src="Curious-Minion-Icon.png" width="50px" /> Sorry, Nothing to show here </p>
+                <p style="text-align: center" id="lm"> <button class="btn btn-primary btn-sm" onclick="loadnext()">&#149; &#149; &#149; Load more</button></p>
+                <p style="text-align: center; display: none" id='cfna'> <button class="btn btn-primary btn-sm" onclick="location.reload()">&#149; Check for new articles &#149;</button></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+        
+      <div id="source-modal" class="modal fade">
+        <div class="modal-dialog" style="margin:0;">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <p class="modal-title">Made with <span><img src="4.png" width="30px" ></span> in Hyderabad</p>
+                <hr>
+            </div>
+            <div class="modal-body">
+            <div class="container">
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+      <script src="js/jquery.min.js"></script>
+      <script src="relativedate.js"></script>
+    <script src="js/nattu.js"></script>
+    <script>        
+    $(document).ready(function(){
+$("#minion1").show();
+    getall();
+
+    });
+        
+        
+       
+        
+        
+        
+    var articledata;
+    var articlelast = 0;
+    function animates(){
+    $('.green').addClass('sd0');
+	$('.red').addClass('sd05');
+	$('.blue').addClass('sd1');
+	$('.yellow').addClass('sd15');
+    }
+    function stopanimates(){
+    $('.green').removeClass('sd0');
+	$('.red').removeClass('sd05');
+	$('.blue').removeClass('sd1');
+	$('.yellow').removeClass('sd15');
+    }
+
+        function getall(){
+            animates();
+            $.ajax({
+                url: "http://apis-asistob.rhcloud.com/articleListSvc",
+                type: "post",
+                data: {nextset: articlelast},
+                success: function(result){
+                    $("#minion1").hide();
+                    var res = JSON.parse(result);
+                    stopanimates();
+                    //console.log(res.success);
+                    if(res.success != "2"){
+                    //console.log(res);
+                    articledata = res.data.children;
+                    //console.log(articledata);
+                    var str= "";
+                    articlelast = res.data.children[0].article_id;
+                    for(i = 0; i< res.data.children.length; i++){
+str = str + "<li class='list-group-item' id="+i+" onclick='openthisarticle("+i+")'><div class='row'><div class='col-xs-12'><span style='color: #2196f3; font-weight: semi-bold'>"+res.data.children[i].article_title+"</span><img src='2.png' width='20px' class='pull-right'></div></div></li>";
+                        articlelast = res.data.children[i].article_id;
+                    }
+                    
+                    $(".listarticlespace").html(str);
+                }
+                    else{
+                        $("#nttd").show();
+                        //$("#minion2").show();
+                        $("#lm").hide();
+                        $("#cfna").show();
+                        
+                        //location.reload();
+                    }
+                },
+                error:function(){
+                    alert("Some thing went wrong! please try again!");
+                }
+                });
+                          
+                          
+        }
+        
+        function getalladd(){
+            animates();
+            $.ajax({
+                url: "http://apis-asistob.rhcloud.com/articleListSvc",
+                type: "post",
+                data: {nextset: articlelast},
+                success: function(result){
+                    $("#minion1").hide();
+                    var res = JSON.parse(result);
+                    stopanimates();
+                    //console.log(res.success);
+                    if(res.success != "2"){
+                    console.log(res);
+                    articledata = res.data.children;
+                    //console.log(articledata);
+                    var str= "";
+                    articlelast = res.data.children[0].article_id;
+                    for(i = 0; i< res.data.children.length; i++){
+str = str + "<li class='list-group-item' id="+i+" onclick='openthisarticle("+i+")'><div class='row'><div class='col-xs-12'><span style='color: #2196f3; font-weight: semi-bold'>"+res.data.children[i].article_title+"</span><img src='2.png' width='20px' class='pull-right'></div></div></li>";
+                        articlelast = res.data.children[i].article_id;
+                    }
+                    
+                    $(".listarticlespace").append(str);
+                }
+                    else{
+                        $("#nttd").show();
+                        //$("#minion2").show();
+                        $("#lm").hide();
+                        $("#cfna").show();
+                        
+                        //location.reload();
+                    }
+                },
+                error:function(){
+                    alert("Some thing went wrong! please try again!");
+                }
+                });
+                          
+                          
+        }
+        
+         function loadnext(){
+            animates();
+             console.log(articlelast)
+             $("#minion1").show();
+            getalladd();
+        }
+        
+        function getnew(){
+            articlelast = 0;
+            getall();
+        }
+
+        function openthisarticle(ire){
+            var title = articledata[ire].article_link;
+            localStorage.setItem('arttitle', title)
+            location.href = "backpage.html"
+        }
+    </script>
+</body>
+</html>
