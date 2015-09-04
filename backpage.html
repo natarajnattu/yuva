@@ -31,36 +31,12 @@
                   </div>
                 </div>
               </nav>
-      <div class="loader">
+<div class="loader" style="margin-top: 70px">
   <div class="green"></div>
   <div class="red"></div>
   <div class="blue"></div>
   <div class="yellow"></div>
 </div>
-      
-      
-      
-    <div class="">
-
-      <br>
-      <br>
-      <br>
-
-
-
-
-
-      <!-- Containers
-      ================================================== -->
-      
-
-
-
-        
-
-        
-        
-      </div>
 
       <div id="approveordeny-modal" style="height: 100%">
         <div class="" style="margin:0; margin-left:0;height: 100%">
@@ -113,16 +89,8 @@
     <script>        
     $(document).ready(function(){
         openthisarticle()
-    var UserID = localStorage.getItem('userid');style="height: 100%"
-    var modhash = localStorage.getItem('modhash');
-    if(modhash == '')
-    {
-        window.location.href="index.html"
-    }
-    else{
-    animates();
-    //getall();
-    }
+        animates();
+        setTimeout(function(){ stopanimates() }, 10000);
     });
     var articledata;
     function animates(){
