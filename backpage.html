@@ -12,7 +12,6 @@
       height: 100%;
       }
       </style>
-      <script type="text/javascript" charset="utf-8" src="phonegap.js">
   </head>
   <body style="background: #fff">
       
@@ -109,14 +108,7 @@
 function openthisarticle(){
             var title = localStorage.getItem('arttitle', title)
             $('#abc_frame').attr('src', title)
-}
-document.addEventListener("deviceready", onDeviceReady, false);
-function onDeviceReady() {
-        document.addEventListener("backbutton", function (e) {
-            e.preventDefault();
-        }, false );
-}
-    
+}   
       
     </script>
 </body>

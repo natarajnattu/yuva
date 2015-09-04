@@ -21,7 +21,6 @@
   border-top-left-radius: 0px;
 }
       </style>
-      <script type="text/javascript" charset="utf-8" src="phonegap.js">
   </head>
   <body>
       
@@ -243,12 +242,6 @@ str = str + "<li class='list-group-item' id="+i+" onclick='openthisarticle("+i+"
             localStorage.setItem('arttitle', title)
             location.href = "backpage.html"
         }
-document.addEventListener("deviceready", onDeviceReady, false);
-    function onDeviceReady() {
-        document.addEventListener("backbutton", function (e) {
-            e.preventDefault();
-        }, false );
-}
     </script>
 </body>
 </html>
